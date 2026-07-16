@@ -1,3 +1,6 @@
+# Please do not change this if you are not sure what youre doing
+# This was made by AbdoD3V on github
+
 import std/[os, strutils, osproc]
 
 proc printError*(cmd: string, msg: string) =
@@ -126,6 +129,18 @@ proc handleBuiltins*(cmd: string, args: seq[string]): bool =
     try:
       removeDir(args[0])
     except OSError as e:
+      printError(cmd, e.msg)
+    return true
+  
+  of "wrfile":
+    if args.len < 2:
+      printError(cmd, "usage: wrfile FILENAME CONTENT")
+      return true
+    try:
+      let f = open(args[0], fmWrite)
+      f.write(args[1])
+      f.close()
+    except CatchableError as e:
       printError(cmd, e.msg)
     return true
 

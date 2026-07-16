@@ -16,4 +16,6 @@ This command packs it into one file and compresses it.
 Configure your bootloader (like GRUB) to point to your kernel and `sodium.cpio.gz`, or launch it directly in a VM like QEMU
 ## Every compiled file should be statically linked
 
+NEW: Working on micropython support, coming soon
+
 Soon i'll add a makefile to automate this
