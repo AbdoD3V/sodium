@@ -143,7 +143,12 @@ proc handleBuiltins*(cmd: string, args: seq[string]): bool =
     except CatchableError as e:
       printError(cmd, e.msg)
     return true
-
+  of "clear":
+    stdout.write("\e[2J\e[H")
+    stdout.flushFile()
+    stdout.write("\e[3J")
+    stdout.flushFile()
+    return true
   else:
     if tryRunSystemBinary(cmd, args):
       return true

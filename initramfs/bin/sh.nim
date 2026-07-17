@@ -119,7 +119,7 @@ proc routeAndExecute(input: string) =
   let expandedTokens = expandEnvVars(rawTokens)
   
   if expandedTokens.len == 0: return
-  let cmd = expandedTokens[0]
+  let cmd = expandedTokens[0].strip()
   let args = if expandedTokens.len > 1: expandedTokens[1..^1] else: @[]
 
   if handleHistoryBuiltins(cmd): return
@@ -137,12 +137,12 @@ loadFileEnvs()
 stdout.write("\e[2J\e[H")
 stdout.flushFile()
 
-echo "NaSH V1.0.0, SodiumOS"
+echo "\e[31mNaSH\e[0m V1.0.0, SodiumOS"
 
 while true:
   try:
     let currentPath = getCurrentDir()
-    stdout.write("NaSH [", currentPath, "]}> ")
+    stdout.write("\e[31mNaSH\e[0m [", "\e[32m", currentPath, "\e[0m]}> ")
     stdout.flushFile()
     
     let input = readLine(stdin)
